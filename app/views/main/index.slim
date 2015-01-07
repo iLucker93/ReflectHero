@@ -1,0 +1,76 @@
+div.navbar.navbar-default.navbar-fixed-top#menu
+  div.container
+    div.navbar-header
+      button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-inverse-collapse"
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      a.navbar-brand href="/" Reflect Hero
+  
+    div.navbar-collapse.collapse.navbar-inverse-collapse
+  
+      ul.nav.navbar-nav
+        li
+          a href="#first" First
+        li
+          a href="#second" Second
+        li
+          a href="#third" Third
+        /li
+        /  = link_to 'Top-100', top_players_path
+        /li
+        /  - if current_user
+        /    = link_to 'Карта мира', map_path
+        /   li
+        /     = link_to 'Inventory', items_path
+        /   li.dropdown
+        /     a href="#" class="dropdown-toggle" data-toggle="dropdown"
+        /       | Quests
+        /     ul.dropdown-menu.center
+        /       li
+        /         = link_to 'Job change', job_path
+        /       li
+        /         a href="#" Other quests
+        /   li
+        /     = link_to 'Auction', auction_index_path
+        /   li
+        /     = link_to 'Shop', shop_path
+  
+      ul.nav.navbar-nav.navbar-right
+        /- if current_user
+        /  li
+        /    = link_to current_user.username, user_path(current_user.id)
+        /  li
+        /    = link_to " Выйти", destroy_user_session_path, method: 'delete'
+        /     ul.dropdown-menu.center style="padding: 15px;min-width: 250px;"
+        /       li
+        /         = image_tag "jobs/#{current_user.job}/#{current_user.gender}.gif"
+        /       br
+        /       li
+        /         = link_to 'My Bio', edit_player_path(current_user)
+        /       br
+        /       li
+        /         = simple_form_for :player, url: {controller: "players", action: "update", id: current_user.id}, method: 'put' do |f|
+        /           div.form-group
+        /             = f.hidden_field :hp, value: current_user.maxhp
+        /             - unless Rails.env.production?
+        /               = f.submit "Restore HP", class: 'btn btn-success' 
+        /       li
+        /         h3 Level: #{current_user.level}
+        /         h5 Zeny: #{current_user.zeny}
+        /         h4 HP: #{current_user.hp} / #{current_user.maxhp}
+        /         div.progress.progress-striped.active
+        /           div.progress-bar.progress-bar-danger style="width: #{(current_user.hp*100/current_user.maxhp).to_i}%"
+        /         h4 Exp: #{current_user.exp} / #{@cur_player_next_lvl_exp}
+        /         div.progress.progress-striped.active
+        /           div.progress-bar style="width: #{(current_user.exp*100/@cur_player_next_lvl_exp+1).to_i}%"
+  
+        / - else
+        /   li
+        /     = link_to "Sign in with Twitter", "/auth/twitter"
+  
+
+div.container
+  div.row
+    div.col-md-12
+    p#first.back style="font-size: 22px;"
