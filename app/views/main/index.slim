@@ -32,7 +32,7 @@ div.container
       div.back style="height: 339px"
         h3#name
         div.caption
-          img#monster_image src=""
+          img.monster#monster_image src=""
           br
           h3#counter
 
@@ -41,20 +41,55 @@ div.container
   div.row.center.back#inventory
     div.col-md-4
       h3 Consumable
-      <div class="list-group">
-        <a href="#" class="list-group-item">
-          <h4 class="list-group-item-heading">List group item heading</h4>
-          <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-        </a>
-        <a href="#" class="list-group-item">
-          <h4 class="list-group-item-heading">List group item heading</h4>
-          <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-        </a>
-      </div>
+      div.list-group
+        - @consumable.each do |consumable|
+          a.list-group-item href="#"
+            div.row
+              div.col-md-2
+                = image_tag "/images/items/#{consumable.item_id}.gif", class: 'item'
+              div.col-md-10
+                h4 class="list-group-item-heading"
+                  = consumable.item.name
+                p.list-group-item-text
+                  = consumable.format
+                p.list-group-item-text
+                  = consumable.ea
+                  |  ea.
+
+    div.col-md-4
+      h3 Equip
+      div.list-group
+        - @equip.each do |equip|
+          a.list-group-item href="#"
+            div.row
+              div.col-md-2
+                = image_tag "/images/items/#{equip.item_id}.gif", class: 'item'
+              div.col-md-10
+                h4 class="list-group-item-heading"
+                  = equip.item.name
+                p.list-group-item-text
+                  = equip.format
+                p.list-group-item-text
+                  = equip.ea
+                  |  ea.
 
 
-
-
+    div.col-md-4
+      h3 Etc
+      div.list-group
+        - @etc.each do |etc|
+          a.list-group-item href="#"
+            div.row
+              div.col-md-2
+                = image_tag "/images/items/#{etc.item_id}.gif", class: 'item'
+              div.col-md-10
+                h4 class="list-group-item-heading"
+                  = etc.item.name
+                p.list-group-item-text
+                  = etc.format
+                p.list-group-item-text
+                  = etc.ea
+                  |  ea.
 
 
 
@@ -89,6 +124,7 @@ javascript:
       // Запускаем счётчик и в нём указываем - какие действия совершать по истечении срока
       monster_hp.start(function(){
         $.post("/exp",{exp: data.monster.exp, monster_id: data.monster.id}),
+        
         $("#exp").text((data.user.exp + data.monster.exp) + " / " + data.user.next + " exp")
         $(".progress-bar").css("width", + progress + "%"),
         // Запускаем счётчик заново

@@ -3,25 +3,24 @@ class MonstersController < ApplicationController
   # Новый монстр в формате JSON
     def get_new_monster
 
-      # @monster = Map.find_by_name(current_user.location).monsters.sample
-      @monster = Monster.last # for test
+      @monster = Map.find_by_name(current_user.location).monsters.sample
 
       respond_to do |format|
         format.json {render json: {user: current_user, monster: @monster}}
       end
 
     end
-    
+
     def new
     end
-    
+
     def create
       Monster.create(monster_params)
       redirect_to :back
     end
-    
+
     private
-    
+
       def monster_params
         params.require(:monster).permit(:name,
           :lvl,
