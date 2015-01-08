@@ -1,76 +1,102 @@
-div.navbar.navbar-default.navbar-fixed-top#menu
-  div.container
-    div.navbar-header
-      button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-inverse-collapse"
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      a.navbar-brand href="/" Reflect Hero
-  
-    div.navbar-collapse.collapse.navbar-inverse-collapse
-  
-      ul.nav.navbar-nav
-        li
-          a href="#first" First
-        li
-          a href="#second" Second
-        li
-          a href="#third" Third
-        /li
-        /  = link_to 'Top-100', top_players_path
-        /li
-        /  - if current_user
-        /    = link_to 'Карта мира', map_path
-        /   li
-        /     = link_to 'Inventory', items_path
-        /   li.dropdown
-        /     a href="#" class="dropdown-toggle" data-toggle="dropdown"
-        /       | Quests
-        /     ul.dropdown-menu.center
-        /       li
-        /         = link_to 'Job change', job_path
-        /       li
-        /         a href="#" Other quests
-        /   li
-        /     = link_to 'Auction', auction_index_path
-        /   li
-        /     = link_to 'Shop', shop_path
-  
-      ul.nav.navbar-nav.navbar-right
-        /- if current_user
-        /  li
-        /    = link_to current_user.username, user_path(current_user.id)
-        /  li
-        /    = link_to " Выйти", destroy_user_session_path, method: 'delete'
-        /     ul.dropdown-menu.center style="padding: 15px;min-width: 250px;"
-        /       li
-        /         = image_tag "jobs/#{current_user.job}/#{current_user.gender}.gif"
-        /       br
-        /       li
-        /         = link_to 'My Bio', edit_player_path(current_user)
-        /       br
-        /       li
-        /         = simple_form_for :player, url: {controller: "players", action: "update", id: current_user.id}, method: 'put' do |f|
-        /           div.form-group
-        /             = f.hidden_field :hp, value: current_user.maxhp
-        /             - unless Rails.env.production?
-        /               = f.submit "Restore HP", class: 'btn btn-success' 
-        /       li
-        /         h3 Level: #{current_user.level}
-        /         h5 Zeny: #{current_user.zeny}
-        /         h4 HP: #{current_user.hp} / #{current_user.maxhp}
-        /         div.progress.progress-striped.active
-        /           div.progress-bar.progress-bar-danger style="width: #{(current_user.hp*100/current_user.maxhp).to_i}%"
-        /         h4 Exp: #{current_user.exp} / #{@cur_player_next_lvl_exp}
-        /         div.progress.progress-striped.active
-        /           div.progress-bar style="width: #{(current_user.exp*100/@cur_player_next_lvl_exp+1).to_i}%"
-  
-        / - else
-        /   li
-        /     = link_to "Sign in with Twitter", "/auth/twitter"
-  
+= content_for(:page_title, current_user.username)
 
 div.container
-  div.row
-    div.col-md-12
-    p#first.back style="font-size: 22px;"
+  div.row.center
+  
+    div.col-md-4
+      div.back style="height: 339px"
+        = image_tag "/images/jobs/#{current_user.job}/#{current_user.gender}.gif"
+        div.caption
+          h3
+            = current_user.username
+          h4
+            = current_user.job
+          p.lead style="color: ghostwhite;"
+            = current_user.bio
+          h4
+            = current_user.zeny
+            |  zeny
+          h4#exp
+            = current_user.exp
+            |  / 
+            = current_user.next
+            |  exp
+          div.col-md-12
+            div.progress.progress-striped.active
+              div.progress-bar style="width: 0%"
+  
+    div.col-md-4
+      h2 VS
+  
+    div.col-md-4
+      div.back style="height: 339px"
+        h3#name
+        div.caption
+          img#monster_image src=""
+          br
+          h3#counter
+
+  br
+  
+  div.row.center.back#inventory
+    div.col-md-4
+      h3 Consumable
+      <div class="list-group">
+        <a href="#" class="list-group-item">
+          <h4 class="list-group-item-heading">List group item heading</h4>
+          <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+        </a>
+        <a href="#" class="list-group-item">
+          <h4 class="list-group-item-heading">List group item heading</h4>
+          <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+        </a>
+      </div>
+
+
+
+
+
+
+
+
+
+javascript:
+  jQuery(document).ready(function($) {
+
+
+    new_monster() // После загрузки страницы сразу запускаем функцию new_monster()
+
+    function new_monster(){
+      // Получаем из экшена Monsters#get_new_monster json-данные, раскидываем их по странице
+      $.get( "/get_new_monster.json", function( data ) {
+
+
+      // Разные переменные
+      var progress = data.user.exp / (data.user.next / 100)
+
+      // Параметры для счётчика
+      var options = {useEasing : false, useGrouping : false, separator : ',', decimal : '.', prefix : '', suffix : ' hp'}
+
+
+        $(".progress-bar").css("width", + progress + "%"),
+        $("#name").text(data.monster.name)
+        $("#monster_image").attr("src", "/images/monsters/" + data.monster.id + ".gif")
+
+      
+      // Сам счётчик с параметрами: ("место отображения", начало, конец, группировка, время, параметры)
+      var monster_hp = new countUp("counter", data.monster.hp, 0, 0, data.monster.hp / #{current_user.str}, options);
+
+      // Запускаем счётчик и в нём указываем - какие действия совершать по истечении срока
+      monster_hp.start(function(){
+        $.post("/exp",{exp: data.monster.exp, monster_id: data.monster.id}),
+        $("#exp").text((data.user.exp + data.monster.exp) + " / " + data.user.next + " exp")
+        $(".progress-bar").css("width", + progress + "%"),
+        // Запускаем счётчик заново
+        new_monster()
+      });
+
+
+
+      });
+    }
+  });

@@ -20,9 +20,7 @@ html
       / script src="https://maps.googleapis.com/maps/api/js?v=3.exp"
       = javascript_include_tag "application"
 
-  body data-spy="scroll" data-target="#menu"
-    div.container
-
-      /= render './partials/header'
-      = yield
-      /= render './partials/footer'
+  body.container data-spy="scroll" data-target="#menu"
+    = render './partials/header'
+    = yield
+    /= render './partials/footer'

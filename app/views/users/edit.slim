@@ -1,0 +1,42 @@
+div.col-md-8.col-md-offset-2
+  div.col-md-10.col-md-offset-1.back.center
+    h2 Изменить пользователя
+    = simple_form_for :user, url: {controller: "users", action: "update"}, method: :put do |f|
+      div.form-group
+        = f.input_field :username, class: 'form-control', placeholder: 'username', value: current_user.username 
+      div.form-group
+        = f.input_field :gender, class: 'form-control', placeholder: 'gender', value: current_user.gender
+      div.form-group
+        = f.input_field :job, class: 'form-control', placeholder: 'job', value: current_user.job
+      div.form-group
+        = f.input_field :bio, class: 'form-control', placeholder: 'bio', value: current_user.bio
+      div.form-group
+        = f.input_field :location, class: 'form-control', placeholder: 'location', value: current_user.location
+      div.form-group
+        = f.input_field :lvl, class: 'form-control', placeholder: 'lvl', value: current_user.lvl
+      div.form-group
+        = f.input_field :exp, class: 'form-control', placeholder: 'exp', value: current_user.exp
+      div.form-group
+        = f.input_field :next, class: 'form-control', placeholder: 'next', value: current_user.next
+      div.form-group
+        = f.input_field :hp, class: 'form-control', placeholder: 'hp', value: current_user.hp
+      div.form-group
+        = f.input_field :sp, class: 'form-control', placeholder: 'sp', value: current_user.sp
+      div.form-group
+        = f.input_field :statpoint, class: 'form-control', placeholder: 'statpoint', value: current_user.statpoint
+      div.form-group
+        = f.input_field :zeny, class: 'form-control', placeholder: 'zeny', value: current_user.zeny
+      div.form-group
+        = f.input_field :str, class: 'form-control', placeholder: 'str', value: current_user.str
+      div.form-group
+        = f.input_field :agi, class: 'form-control', placeholder: 'agi', value: current_user.agi
+      div.form-group
+        = f.input_field :vit, class: 'form-control', placeholder: 'vit', value: current_user.vit
+      div.form-group
+        = f.input_field :int, class: 'form-control', placeholder: 'int', value: current_user.int
+      div.form-group
+        = f.input_field :dex, class: 'form-control', placeholder: 'dex', value: current_user.dex
+      div.form-group
+        = f.input_field :luk, class: 'form-control', placeholder: 'luk', value: current_user.luk
+      div.form-group
+        = f.submit "Изменить", class: 'btn btn-block btn-lg btn-warning'

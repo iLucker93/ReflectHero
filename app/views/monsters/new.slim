@@ -1,0 +1,56 @@
+div.col-md-8.col-md-offset-2
+  div.col-md-10.col-md-offset-1.back.center
+    h2 Новый монстр
+    = simple_form_for :monster, url: {controller: "monsters", action: "create"} do |f|
+      div.form-group
+        = f.input_field :name, class: 'form-control', placeholder: 'name'
+      div.form-group
+        = f.input_field :lvl, class: 'form-control', placeholder: 'lvl'
+      div.form-group
+        = f.input_field :hp, class: 'form-control', placeholder: 'hp'
+      div.form-group
+        = f.input_field :sp, class: 'form-control', placeholder: 'sp'
+      div.form-group
+        = f.input_field :exp, class: 'form-control', placeholder: 'exp'
+      div.form-group
+        = f.input_field :jexp, class: 'form-control', placeholder: 'jexp'
+      div.form-group
+        = f.input_field :atk, class: 'form-control', placeholder: 'atk'
+      div.form-group
+        = f.input_field :def, class: 'form-control', placeholder: 'def'
+      div.form-group
+        = f.input_field :mdef, class: 'form-control', placeholder: 'mdef'
+      div.form-group
+        = f.input_field :str, class: 'form-control', placeholder: 'str'
+      div.form-group
+        = f.input_field :agi, class: 'form-control', placeholder: 'agi'
+      div.form-group
+        = f.input_field :vit, class: 'form-control', placeholder: 'vit'
+      div.form-group
+        = f.input_field :int, class: 'form-control', placeholder: 'int'
+      div.form-group
+        = f.input_field :dex, class: 'form-control', placeholder: 'dex'
+      div.form-group
+        = f.input_field :luk, class: 'form-control', placeholder: 'luk'
+      div.form-group
+        = f.input_field :map_id, class: 'form-control', placeholder: 'map_id'
+      div.form-group
+        = f.input_field :element, class: 'form-control', placeholder: 'element'
+      div.form-group
+        = f.input_field :item_drop, class: 'form-control', placeholder: 'item_drop'
+      div.form-group
+        = f.input_field :item_chance, class: 'form-control', placeholder: 'item_chance'
+      div.form-group
+        = f.input_field :equip_drop, class: 'form-control', placeholder: 'equip_drop'
+      div.form-group
+        = f.input_field :equip_chance, class: 'form-control', placeholder: 'equip_chance'
+      div.form-group
+        = f.input_field :quest_drop, class: 'form-control', placeholder: 'quest_drop'
+      div.form-group
+        = f.input_field :quest_chance, class: 'form-control', placeholder: 'quest_chance'
+      div.form-group
+        = f.input_field :card_drop, class: 'form-control', placeholder: 'card_drop'
+      div.form-group
+        = f.input_field :card_chance, class: 'form-control', placeholder: 'card_chance'
+      div.form-group
+        = f.submit "Создать", class: 'btn btn-block btn-lg btn-success'
