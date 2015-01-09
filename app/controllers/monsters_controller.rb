@@ -6,7 +6,7 @@ class MonstersController < ApplicationController
       @monster = Map.find_by_name(current_user.location).monsters.sample
 
       respond_to do |format|
-        format.json {render json: {user: current_user, monster: @monster}}
+        format.json {render json: {user: current_user, monster: @monster, etc: Box.where(user_id: current_user.id).where(format: "etc")}}
       end
 
     end

@@ -32,7 +32,7 @@ div.container
       div.back style="height: 339px"
         h3#name
         div.caption
-          img.monster#monster_image src=""
+          img.monsters#monster_image src=""
           br
           h3#counter
 
@@ -46,7 +46,7 @@ div.container
           a.list-group-item href="#"
             div.row
               div.col-md-2
-                = image_tag "/images/items/#{consumable.item_id}.gif", class: 'item'
+                = image_tag "/images/items/#{consumable.item_id}.gif", class: 'items'
               div.col-md-10
                 h4 class="list-group-item-heading"
                   = consumable.item.name
@@ -76,7 +76,7 @@ div.container
 
     div.col-md-4
       h3 Etc
-      div.list-group
+      div.list-group#etc
         - @etc.each do |etc|
           a.list-group-item href="#"
             div.row
@@ -126,7 +126,10 @@ javascript:
         $.post("/exp",{exp: data.monster.exp, monster_id: data.monster.id}),
         
         $("#exp").text((data.user.exp + data.monster.exp) + " / " + data.user.next + " exp")
-        $(".progress-bar").css("width", + progress + "%"),
+        $(".progress-bar").css("width", + progress + "%")
+          
+        
+
         // Запускаем счётчик заново
         new_monster()
       });

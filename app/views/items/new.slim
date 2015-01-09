@@ -1,6 +1,6 @@
 div.col-md-8.col-md-offset-2
   div.col-md-10.col-md-offset-1.back.center
-    h2 Новая запись
+    h2 Новый предмет
     = simple_form_for :item, url: {controller: "items", action: "create"} do |f|
       div.form-group
         = f.input_field :name, class: 'form-control', placeholder: 'Name'

@@ -7,7 +7,7 @@ class MainController < ApplicationController
     def index
       # Ищем все съестные припасы игрока
       @consumable = Box.where(user_id: current_user.id).where(format: 'consumable') # => ToDo: Нужно будет переписать под любого пользователя, а не только под текущего
-      @equip      = Box.where(user_id: current_user.id).where(format: 'equip')
+      @equip      = Box.where(user_id: current_user.id).where(format: 'weapon' || 'shield')
       @etc        = Box.where(user_id: current_user.id).where(format: 'etc')
     end
 
