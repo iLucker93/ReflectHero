@@ -2,7 +2,8 @@ class Box < ActiveRecord::Base
 
   belongs_to :item
 
-  # Разыгрывается выпадение предметов различных типов (используемые предметы consumable, экипировка equip, предметы для квестов etc).
+  # Разыгрывается выпадение предметов различных типов
+  # (используемые предметы consumable, экипировка equip, предметы для квестов etc).
   def self.chance(monster, user, etc, equip, consumable) 
     item_drop(monster, user, consumable, "consumable")
     item_drop(monster, user, equip, "equip")
@@ -12,9 +13,10 @@ class Box < ActiveRecord::Base
 
   private 
   
-  # Вероятность выпадения предмета из монстра определяется значением item_chance, equip_chance, quest_chance в зависимости от типа предмета.
-  # В случае успеха предмет попадает в инвентарь игрока. Если уже есть этот предмет в инвентаре, то количество увеличивается +1 ,
-  # иначе просто создается предмет в инвентаре.
+  # Вероятность выпадения предмета из монстра определяется значением item_chance, equip_chance, quest_chance
+  # в зависимости от типа предмета.
+  # В случае успеха предмет попадает в инвентарь игрока.
+  # Если уже есть этот предмет в инвентаре, то количество увеличивается +1, иначе просто создается предмет в инвентаре.
   def item_drop(monster, user, item, type)
     
     @item_chance = case type
