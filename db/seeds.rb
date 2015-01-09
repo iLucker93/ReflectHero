@@ -8,6 +8,7 @@ Map.create!([
   {name: "new_zone03"}
 ])
 Monster.create!([
-  {name: "Poring", lvl: 1, hp: 50, sp: 0, exp: 2, jexp: 1, atk: 1, def: 0, mdef: 5, str: 1, agi: 1, vit: 1, int: 0, dex: 6, luk: 30, map_id: 1, element: "water_3", item_drop: 3, item_chance: 10.0, equip_drop: 1, equip_chance: 10.0, quest_drop: 3, quest_chance: 15.0, card_drop: 4001, card_chance: 0.01},
-  {name: "Poporing", lvl: 14, hp: 344, sp: 0, exp: 81, jexp: 44, atk: 72, def: 0, mdef: 10, str: 1, agi: 14, vit: 14, int: 0, dex: 19, luk: 15, map_id: 1, element: "poison_1", item_drop: 4, item_chance: 2.0, equip_drop: 2, equip_chance: 0.05, quest_drop: 4, quest_chance: 15.0, card_drop: 4033, card_chance: 0.01}
+  {name: "Poring", lvl: 1, hp: 50, exp: 2, jexp: 1, atk: 1, def: 0, mdef: 5, str: 1, agi: 1, vit: 1, int: 0, dex: 6, luk: 30, map_id: 1, element: "water_3", item_drop: 3, item_chance: 10.0, equip_drop: 1, equip_chance: 10.0, quest_drop: 3, quest_chance: 15.0, card_drop: 4001, card_chance: 0.01},
+  {name: "Poporing", lvl: 14, hp: 344, exp: 81, jexp: 44, atk: 72, def: 0, mdef: 10, str: 1, agi: 14, vit: 14, int: 0, dex: 19, luk: 15, map_id: 1, element: "poison_1", item_drop: 4, item_chance: 2.0, equip_drop: 2, equip_chance: 0.05, quest_drop: 4, quest_chance: 15.0, card_drop: 4033, card_chance: 0.01},
+  {name: "Drops", lvl: 3, hp: 55, exp: 4, jexp: 3, atk: 13, def: 0, mdef: 0, str: 1, agi: 3, vit: 3, int: 0, dex: 12, luk: 15, map_id: 1, element: "fire_1", item_drop: 5, item_chance: 0.2, equip_drop: 6, equip_chance: 0.8, quest_drop: 7, quest_chance: 75.0, card_drop: 4004, card_chance: 0.01}
 ])

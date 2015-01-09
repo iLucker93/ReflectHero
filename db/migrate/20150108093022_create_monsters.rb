@@ -4,7 +4,6 @@ class CreateMonsters < ActiveRecord::Migration
       t.string  :name
       t.integer :lvl
       t.integer :hp
-      t.integer :sp
       t.integer :exp
       t.integer :jexp
       t.integer :atk

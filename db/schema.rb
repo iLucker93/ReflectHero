@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(version: 20150108093135) do
     t.string  "name"
     t.integer "lvl"
     t.integer "hp"
-    t.integer "sp"
     t.integer "exp"
     t.integer "jexp"
     t.integer "atk"
